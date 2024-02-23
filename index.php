@@ -6,7 +6,6 @@ require_once(__DIR__ . "./config/db.php");
 $query = "SELECT * FROM buku";
 $result = mysqli_query($connection, $query);
 
-var_dump($result);
 while ($row = mysqli_fetch_assoc($result)) {
   echo $row["kode_buku"];
   echo $row["kategori"];

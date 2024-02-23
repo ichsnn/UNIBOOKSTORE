@@ -1,3 +1,9 @@
+<?php
+require_once(__DIR__ . "../../config/db.php");
+
+$dataPenerbit = $connection->query("SELECT id_penerbit, nama, alamat, kota, telepon FROM penerbit");
+?>
+
 <div class="card">
   <div class="card-body">
     <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalAdd">Tambah
@@ -14,12 +20,15 @@
         </tr>
       </thead>
       <tbody>
+        <?php
+        while ($row = $dataPenerbit->fetch_assoc()) {
+        ?>
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <th scope="row"><?php echo $row["id_penerbit"]; ?></th>
+          <td><?php echo $row["nama"]; ?></td>
+          <td><?php echo $row["alamat"]; ?></td>
+          <td><?php echo $row["kota"]; ?></td>
+          <td><?php echo $row["telepon"]; ?></td>
           <td>
             <div>
               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEdit"><i
@@ -30,6 +39,9 @@
             </div>
           </td>
         </tr>
+        <?php
+        }
+        ?>
       </tbody>
     </table>
   </div>
@@ -39,16 +51,20 @@
 <div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
+    <form class="modal-content" method="POST" action="/form/penerbit.php">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Data</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <!-- Form Add -->
+        <div class="form-floating mb-3">
+          <input required type="text" class="form-control" id="floatingInputDisabled" placeholder="ID Penerbit" name="id">
+          <label for="floatingInputDisabled">ID Penerbit</label>
+        </div>
         <!-- Nama -->
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInputDisabled" placeholder="Nama" name="nama">
+          <input required type="text" class="form-control" id="floatingInputDisabled" placeholder="Nama" name="nama">
           <label for="floatingInputDisabled">Nama</label>
         </div>
         <!-- Alamat -->
@@ -59,21 +75,21 @@
         </div>
         <!-- Kota -->
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInputDisabled" placeholder="Kota" name="kota">
+          <input required type="text" class="form-control" id="floatingInputDisabled" placeholder="Kota" name="kota">
           <label for="floatingInputDisabled">Kota</label>
         </div>
         <!-- Telepon -->
         <div class="form-floating">
-          <input type="tel" class="form-control" id="floatingInputDisabled" placeholder="Telepon" name="telepon">
+          <input required type="tel" class="form-control" id="floatingInputDisabled" placeholder="Telepon" name="telepon">
           <label for="floatingInputDisabled">Telepon</label>
         </div>
         <!-- Form Add -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline" data-bs-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 
@@ -90,13 +106,13 @@
         <!-- Form Edit -->
         <!-- ID Penerbit -->
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInputDisabled" placeholder="ID Penerbit" name="idPenerbit"
+          <input required type="text" class="form-control" id="floatingInputDisabled" placeholder="ID Penerbit" name="idPenerbit"
             disabled>
           <label for="floatingInputDisabled">ID Penerbit</label>
         </div>
         <!-- Nama -->
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInputDisabled" placeholder="Nama" name="nama">
+          <input required type="text" class="form-control" id="floatingInputDisabled" placeholder="Nama" name="nama">
           <label for="floatingInputDisabled">Nama</label>
         </div>
         <!-- Alamat -->
@@ -107,12 +123,12 @@
         </div>
         <!-- Kota -->
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInputDisabled" placeholder="Kota" name="kota">
+          <input required type="text" class="form-control" id="floatingInputDisabled" placeholder="Kota" name="kota">
           <label for="floatingInputDisabled">Kota</label>
         </div>
         <!-- Telepon -->
         <div class="form-floating">
-          <input type="tel" class="form-control" id="floatingInputDisabled" placeholder="Telepon" name="telepon">
+          <input required type="tel" class="form-control" id="floatingInputDisabled" placeholder="Telepon" name="telepon">
           <label for="floatingInputDisabled">Telepon</label>
         </div>
         <!-- Form Edit -->
