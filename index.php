@@ -1,5 +1,22 @@
 <?php require_once(__DIR__ . "./views/templates/header.php") ?>
 
+<?php
+require_once(__DIR__ . "./config/db.php");
+
+$query = "SELECT * FROM buku";
+$result = mysqli_query($connection, $query);
+
+var_dump($result);
+while ($row = mysqli_fetch_assoc($result)) {
+  echo $row["kode_buku"];
+  echo $row["kategori"];
+  echo $row["nama_buku"];
+  echo $row["stok"];
+  echo $row["harga"];
+  echo $row["penerbit"];
+}
+?>
+
 <h1 class="mb-5">Home</h1>
 
 <div class="card">
